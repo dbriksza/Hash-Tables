@@ -54,7 +54,13 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        index = self._hash_mod(key)
+
+        new_link = LinkedPair(key, value)
+
+        new_link.next = self.storage[index]
+
+        self.storage[index] = new_link
 
 
 
@@ -66,8 +72,9 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
-
+        index = self._hash_mod(key)
+        if self.storage[index] is not None:
+            self.storage[index] = None
 
     def retrieve(self, key):
         '''
@@ -77,7 +84,13 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        index = self._hash_mod(key)
+        check = self.storage[index]
+
+        while check:
+            if check.key == key:
+                return check.value
+            check = check.next
 
 
     def resize(self):
@@ -87,7 +100,9 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        for _ in range(self.capacity):
+            self.storage.append(None)
+
 
 
 
